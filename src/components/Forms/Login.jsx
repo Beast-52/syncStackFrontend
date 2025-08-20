@@ -3,20 +3,22 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/redux/userSlice";
+import { BASE_URL } from "../../utils/constants";
 
 const Login = () => {
   const [email, setEmail] = useState("elonmusk12@gmail.com");
   const [password, setPassword] = useState("Elon@123");
+  const [err, setErr] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const result = await axios.post(
-        "http://localhost:7777/auth/login",
+        BASE_URL + "auth/login",
         {
           email,
           password,
@@ -30,6 +32,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
+      setErr(error);
     }
   };
 
@@ -56,7 +59,7 @@ const Login = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-
+        {err && <p className="text-red-500">{err?.response.data}</p>}
         <button className="btn btn-neutral mt-4">Login</button>
       </form>
     </div>

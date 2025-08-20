@@ -11,7 +11,9 @@ const userSlice = createSlice({
       return action.payload;
     },
     logout: (state) => {
-      return null;
+      return {
+        user:null
+      };
     },
   },
 });
