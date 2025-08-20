@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@font-face {
+  font-family: AirBeat;
+  src: url('/Airbeat.ttf');
+}
+
+@theme{
+  --font-air:AirBeat;
+  --font-inter:"Inter", sans-serif;
+}
