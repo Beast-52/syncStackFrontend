@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/redux/userSlice";
 import { BASE_URL } from "../../utils/constants";
+import { toast } from "react-toastify";
 
 // Input fields config
 const fields = [
@@ -103,16 +104,17 @@ const ProfileEdit = ({ data, setData }) => {
     try {
       console.log(data);
 
-      const response = await axios.patch(
-        `${BASE_URL}profile/edit`,
-        data,
-        {
-          withCredentials: true,
-        }
+      const response = await axios.patch(`${BASE_URL}profile/edit`, data, {
+        withCredentials: true,
+      });
+      dispatch(
+        login({
+          user: response.data.updatedUser,
+        })
       );
-      dispatch(login(response.data.updatedUser));
       navigate("/profile");
-      setErr('')
+      setErr("");
+      toast.success("Profile updated successfully!");
     } catch (error) {
       console.error(error);
       setErr(error);

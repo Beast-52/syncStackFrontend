@@ -10,14 +10,16 @@ const Card = ({
   about,
   photoUrl,
   idx,
+  className,
 }) => {
   return (
     <div
       style={{
         rotate: idx * -5 + "deg",
-
       }}
-      className={`card bg-base-100 w-1/8 h-96 shadow-sm absolute rounded-lg overflow-hidden scale-125 `}
+      className={`card bg-base-100 w-1/8 h-96 shadow-sm ${
+        className && className
+      } rounded-lg overflow-hidden scale-125 `}
     >
       <img
         src={photoUrl}
