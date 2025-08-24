@@ -24,14 +24,22 @@ const Feed = () => {
   };
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [feedUsers]);
+  if (!feedUsers) return <div>Loading...</div>;
+  if (feedUsers.feed.length <= 0)
+    return <h1 className="text-2xl my-10 mx-auto">No Users Found</h1>;
   return (
     <div className="min-h-[73vh] flex items-center justify-center relative">
       {feedUsers?.feed
-        ?.slice()
-
         .map((user, idx) => (
-          <Card key={user._id} {...user} idx={idx} className="absolute" />
+          <Card
+            key={user.id}
+            {...user}
+            idx={idx}
+            className="absolute"
+            id={user._id}
+            btn
+          />
         ))
         .reverse()}
     </div>

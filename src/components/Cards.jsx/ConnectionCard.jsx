@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../utils/constants";
+import { removeRequest } from "../../utils/redux/RequestSlice";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ConnectionCard = ({
   className,
@@ -9,10 +14,43 @@ const ConnectionCard = ({
   lastName,
   about,
   skill,
+  id,
 }) => {
-  const [btnState, setBtnState] = React.useState([
-    { title: "Accept", onClick: () => console.log("accepted") },
-    { title: "Reject", onClick: () => console.log("rejected") },
+  console.log(id)
+  const dispatch = useDispatch();
+  const [btnState, setBtnState] = useState([
+    {
+      title: "Accept",
+      onClick: async (id) => {
+        try {
+          await axios.post(
+            BASE_URL + `connection/review/accepted/${id}`,
+            {},
+            { withCredentials: true }
+          );
+          dispatch(removeRequest(id));
+          toast.success("Connection Request Accepted!");
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    },
+    {
+      title: "Reject",
+      onClick: async (id) => {
+        try {
+          await axios.post(
+            BASE_URL + `connection/review/rejected/${id}`,
+            {},
+            { withCredentials: true }
+          );
+          dispatch(removeRequest(id));
+          toast.success("Connection Request Rejected!");
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    },
   ]);
 
   return (
@@ -47,9 +85,9 @@ const ConnectionCard = ({
               <button
                 key={idx}
                 className={`btn ${
-                  idx == 0 ? "btn-secondary" : "btn-accent"
+                  idx === 0 ? "btn-secondary" : "btn-accent"
                 } btn-md`}
-                onClick={btn.onClick}
+                onClick={() => btn.onClick(id)}
               >
                 {btn.title}
               </button>

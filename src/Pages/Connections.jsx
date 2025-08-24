@@ -30,15 +30,14 @@ const Connections = () => {
     return () => {
       dispatch(removeConnections());
     };
-  }, []);
+  }, [connections]);
   if (err) return <div>Error: {err.message}</div>;
   return (
     <div>
       <div className="min-h-[73vh] flex items-center justify-center flex-col gap-3">
         {connections?.map((user, idx) => (
-          <ConnectionCard key={user._id} {...user} idx={idx}  />
+          <ConnectionCard key={user._id} {...user} idx={idx} />
         ))}
-       
       </div>
     </div>
   );

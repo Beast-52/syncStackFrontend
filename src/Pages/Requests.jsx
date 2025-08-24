@@ -33,8 +33,14 @@ const Connections = () => {
   return (
     <div>
       <div className="min-h-[73vh] flex items-center justify-center flex-col gap-3">
-        {requests?.map((user, idx) => (
-          <ConnectionCard key={user._id} {...user} idx={idx} btns />
+        {requests?.map((req, idx) => (
+          <ConnectionCard
+            key={req._id}
+            {...req.senderId}
+            idx={idx}
+            btns
+            id={req._id}
+          />
         ))}
       </div>
     </div>
