@@ -38,6 +38,11 @@ const Connections = () => {
         {connections?.map((user, idx) => (
           <ConnectionCard key={user._id} {...user} idx={idx} />
         ))}
+        {connections?.length === 0 && (
+          <div className="text-center text-lg font-medium">
+            No Connections Found
+          </div>
+        )}
       </div>
     </div>
   );

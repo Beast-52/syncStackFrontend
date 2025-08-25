@@ -29,7 +29,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
+        <Link to='/connections' className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -44,9 +44,9 @@ const Navbar = () => {
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-        </button>
+        </Link>
 
-        <button className="btn btn-ghost btn-circle">
+        <Link to='/requests' className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ const Navbar = () => {
             </svg>
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
-        </button>
+        </Link>
 
         {user && (
           <div className="dropdown dropdown-end">
@@ -90,9 +90,7 @@ const Navbar = () => {
                   <span className="badge">New</span>
                 </Link>
               </li>
-              <li>
-                <a>Settings</a>
-              </li>
+              
               <li>
                 <button onClick={handleLogout}>Logout</button>
               </li>

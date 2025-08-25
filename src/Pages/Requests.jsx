@@ -42,6 +42,11 @@ const Connections = () => {
             id={req._id}
           />
         ))}
+        {requests?.length === 0 && (
+          <div className="text-center text-lg font-medium">
+            No Connection Requests
+          </div>
+        )}
       </div>
     </div>
   );

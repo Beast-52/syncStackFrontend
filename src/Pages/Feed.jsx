@@ -27,7 +27,10 @@ const Feed = () => {
   }, [feedUsers]);
   if (!feedUsers) return <div>Loading...</div>;
   if (feedUsers.feed.length <= 0)
-    return <h1 className="text-2xl my-10 mx-auto">No Users Found</h1>;
+    return (
+  <div className="min-h-[73vh] flex items-center justify-center font-semibold text-2xl">
+    No Users Found
+  </div>);
   return (
     <div className="min-h-[73vh] flex items-center justify-center relative">
       {feedUsers?.feed
